@@ -1,0 +1,126 @@
+.login-page-container
+{
+  box-sizing: border-box;
+  padding:0px 20px;
+  display: flex;
+  height: 100vh;
+}
+.shortcut-check
+{
+  font-size: 14px;
+  font-family: 'Comfortaa',sans-serif;
+  position: absolute;
+  top: -40px;
+  right: 0px;
+  color:#b0b0b0;
+  
+}
+.shortcut-check h5
+{
+  display: inline-block;
+}
+.login-page-container button p
+{
+  margin: auto 0 ;
+}
+.login-page-container button:hover
+{
+  background: #4B21FF;
+}
+.login-page-container button
+{
+  margin-top: 20px;
+  outline-style: none;
+  display: flex;
+  border-style: none;
+  justify-content: space-between;
+  border-radius: 2px;
+  background: #6037FF;
+  padding:7px 15px;
+  color: #f8f8f8;
+  font-size: 15px;
+  font-family: 'yantramanav',sans-serif;
+  width: 90px;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
+}
+.center-form-box
+{
+  margin:auto;
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  position: relative;
+}
+@media(max-width:470px)
+{
+  .center-form-box
+  {
+    width:75%;
+    margin:auto;
+  }
+}
+.input-login-wrap
+{
+  position: relative;
+  margin: 25px 5px;
+  font-family: 'Roboto',sans-serif;
+}
+
+.input-login-wrap i
+{
+  position: absolute;
+  left: -40px;
+  top: 0px;
+  color: #c0c0c0;
+  transition: color .2s;
+}
+.input-login-wrap label
+{
+  position: absolute;
+  top:0px;
+  left: 5px;
+  pointer-events: none;
+  color: #b0b0b0;
+  font-size: 15px;
+  transition: all .2s;
+}
+.input-login-wrap input
+{
+  color: #343434;
+  border-style: none;
+  width: 100%;
+  padding:5px;
+  outline-style: none;
+  font-size: 14px;
+  border-bottom: 2px solid #c0c0c0;
+  transition: border-color .2s;
+}
+.input-login-wrap input:focus + label,.input-login-wrap label.active
+{
+  top: -20px;
+  font-size: 12px;
+  color: #6037FF;
+}
+.input-login-wrap input:focus + label + i,.input-login-wrap i.active
+{
+  color: #6037FF;
+}
+.input-login-wrap input:focus,.input-login-wrap input.active
+{
+  border-color: #6037FF;
+}
+.highlight
+{
+  font-weight: 600;
+  color: #4B21FF;
+}
+.dot
+{
+  display: block;
+  content: " ";
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background:#4B21FF;
+  margin-right:0px;
+}

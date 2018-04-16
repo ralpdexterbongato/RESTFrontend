@@ -1,0 +1,35 @@
+<div class="contact-content-container">
+  <div class="content-box-container">
+    <h3 class="big-top-title">LET ME KNOW</h3>
+    <div class="contact-wrap">
+      <div class="contact-boxes-container">
+        <div class="contact-box">
+          <h3>Phone</h3>
+          <p>(+63) 927 585 0184</p>
+          <p>0927 585 0184</p>
+        </div>
+        <div class="contact-box">
+          <h3>Email</h3>
+          <p>rdc2898@gmail.com</p>
+          <p>ralpdexterbongato@gmail.com</p>
+        </div>
+        <div class="contact-box">
+          <h3>Address</h3>
+          <p>Brgy. Lajog, Calumbangan St., Clarin</p>
+          <p>Bohol, Philippines</p>
+        </div>
+      </div>
+      <div class="floating-message-form">
+        <h3 class="message-form-title">Send A Message</h3>
+        <div class="inputs-container">
+          <input type="text" [(ngModel)]="cfullname" placeholder="Your Name" autocomplete="false">
+          <input type="email" [(ngModel)]="cemail" placeholder="Your Email"  autocomplete="false" >
+          <input type="text" [(ngModel)]="cbudget" placeholder="Your Budget Range"  autocomplete="false" >
+          <textarea placeholder="Your Message" [(ngModel)]="cmessage"></textarea>
+          <button type="button" (click)="submitMessage()" name="button">SEND MESSAGE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

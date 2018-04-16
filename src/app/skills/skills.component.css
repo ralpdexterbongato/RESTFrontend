@@ -1,0 +1,148 @@
+.skills-container
+{
+  padding:25px;
+}
+@media (max-width:400px)
+{
+  .skills-container
+  {
+    padding:25px 10px;
+  }
+}
+.big-top-title
+{
+  font-size: 25px;
+  margin-bottom: 25px;
+  font-family:'Yantramanav',sans-serif;
+}
+.boxes-container
+{
+  display: flex;
+  justify-content:space-between;
+  min-height: 50vh;
+  flex-wrap: wrap;
+  margin:0 auto;
+}
+@media (max-width:500px)
+{
+  .big-top-title
+  {
+    font-size: 20px;
+  }
+  .boxes-container
+  {
+    justify-content:center;
+  }
+  .skill-box
+  {
+    margin:5px;
+  }
+}
+.skill-title
+{
+  margin-bottom: 0px;
+  font-size: 12px;
+  font-family: 'Comfortaa',sans-serif;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding-top: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.skill-screen
+{
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  display: flex;
+}
+.skill-box:hover .laravellogo  path
+{
+  fill:#F05340;
+}
+.skill-box:hover .angularlogo  path
+{
+  fill:#E13137;
+}
+.skill-box:hover .phplogo  path
+{
+  fill:#777BB3;
+}
+.skill-box:hover .sqllogo  path
+{
+  fill:#E4322B;
+}
+.skill-box:hover .htmllogo  path
+{
+  fill:#E44D26;
+}
+.skill-box:hover .csslogo  path
+{
+  fill:#2CA9E1;
+}
+.skill-box:hover .jslogo  path
+{
+  fill:#F0DB4F;
+}
+.skill-box:hover .jquerylogo  path
+{
+  fill:#1B75BB;
+}
+.skill-box:hover .vuelogo  path
+{
+  fill:#41B883;
+}
+.skill-box:hover .mysqllogo  path
+{
+  fill:#F17B2D;
+}
+.skill-box:hover .gitlogo  path
+{
+  fill:#F05134;
+}
+.skill-box:hover .atomlogo  path
+{
+  fill:#3AB57E;
+}
+.skill-box path
+{
+  transition: fill .3s;
+}
+.skill-box svg
+{
+  width: 60px;
+  margin: auto;
+}
+.skill-box
+{
+  box-sizing: border-box;
+  padding:10px;
+  border-radius: 2px;
+  width:200px;
+  height: 190px;
+  background: #454545;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 40px;
+}
+@media (max-width:686px)
+{
+  .skill-box
+  {
+    width: 110px;
+    height: 80px;
+    padding:3px;
+    margin-bottom: 20px;
+  }
+  .skill-title
+  {
+    font-size: 12px;
+    text-align: center;
+  }
+  .skill-box svg
+  {
+    width: 40px;
+  }
+}

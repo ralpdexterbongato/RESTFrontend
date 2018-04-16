@@ -1,0 +1,62 @@
+
+<div class="main-container" [ngClass]="{'noscroll':drawerIsActive==true}">
+  <div class="static-side-wrap">
+    <div class="static-side-bar-container">
+      <div class="side-content">
+        <div class="static-logo">
+          <div class="logo-wrap" (click)="adminlogin()">
+            <svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 222 305">
+            <path id="centerpath" d="M134.4,150.3h-21.1l-43.5-61C79,85.5,86.2,80,91.3,72.8S99,57.5,99,48.3c0-11.7-3.7-20.5-11.1-26.7
+              c-7.4-6.1-18-9.2-31.9-9.2H12.3V157h20.3V95.9h19.1L92.9,157l-0.9,2v133.3l40.8-2c23,0,41.3-6.6,55-19.7s20.6-30.5,20.6-52.1
+              C208.4,173,183.7,150.3,134.4,150.3z"/>
+            </svg>
+          </div>
+        </div>
+        <ul class="info-list">
+          <li>
+            <label>Email</label>
+            <p>rdc2898@gmail.com</p>
+          </li>
+          <li>
+            <label>Phone</label>
+            <p>+63 927 585 0184</p>
+          </li>
+          <li>
+            <label>Find Me On</label>
+            <p>
+              <a href="https://www.facebook.com/rdb2898" target="_blank"><i class="material-icons"><img src="./assets/images/facebook.svg" alt="icon"></i></a>
+              <a href="https://github.com/ralpdexterbongato" target="_blank"><i class="material-icons" ><img src="./assets/images/github.svg"  alt="icon"></i></a>
+              <a href="https://twitter.com/rdb2898" target="_blank"><i class="material-icons"><img src="./assets/images/twitter.svg"  alt="icon"></i></a>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="content-container">
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<div class="static-burger" (click)="toggleDrawer()">
+  <div class="burger-layer layer1" [ngClass]="{'active': drawerIsActive==true}">
+  </div>
+  <div class="burger-layer layer2" [ngClass]="{'active': drawerIsActive==true}">
+  </div>
+  <div class="burger-layer layer3" [ngClass]="{'active': drawerIsActive==true}">
+  </div>
+</div>
+<div class="drawer-nav" [ngClass]="{'active': drawerIsActive==true}">
+  <div class="sm-logo">
+  </div>
+  <ul>
+    <li (click)="toggleDrawer()" routerLink="/" [routerLinkActive]="'is-active'"><i class="material-icons">info_outline</i> About</li>
+    <li (click)="toggleDrawer()" routerLink="/projects" [routerLinkActive]="'is-active'"><i class="material-icons">developer_mode</i> Project</li>
+    <li (click)="toggleDrawer()" routerLink="/skills" [routerLinkActive]="'is-active'"><i class="material-icons">code</i> Skills</li>
+    <li (click)="toggleDrawer()" routerLink="/contact" [routerLinkActive]="'is-active'"><i class="material-icons">phone</i> Contact</li>
+  </ul>
+</div>
+<div (click)="toggleDrawer()" class="modal-background" [ngClass]="{'active': drawerIsActive==true}">
+
+</div>
