@@ -5,6 +5,7 @@
 .dash-title
 {
   font-size: 25px;
+  font-weight: 600;
   color: #343434;
 }
 .dash-sm-boxes
@@ -37,10 +38,31 @@
   background: #fff;
   filter: drop-shadow(0px 0px 3px rgba(100, 100, 100, 0.4));
   margin-right: 30px;
+  padding:25px;
 }
-.top-offers-box
+.inbox-box h4
 {
+  font-size: 20px;
+}
+.inbox-top
+{
+  display: flex;
+  justify-content:space-between;
+}
+.inbox-top select
+{
+  margin-top: 5px;
+  border:1px solid #e1e1e1;
+  outline-style: none;
+  border-radius: 2px;
+  color:#444444;
+  padding:5px;
+}
+.loyal-customers-container
+{
+  padding:25px;
   flex:1;
+  box-sizing: border-box;
   background: #fff;
   border-radius: 2px;
   filter: drop-shadow(0px 0px 3px rgba(100, 100, 100, 0.4));
@@ -85,11 +107,183 @@
 {
   color: #fff;
   text-align: center;
-  margin-left: 2px;
-  margin-top: 2px;
+  margin-left: 3px;
+  margin-top: 3px;
 }
 .sm-box-right p
 {
   font-size: 14px;
 }
 
+.messages-table
+{
+  margin-top: 15px;
+  max-height: 350px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+/* width */
+.messages-table::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* Track */
+.messages-table::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.messages-table::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+/* Handle on hover */
+.messages-table::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.messages-table table
+{
+  width: 100%;
+  height: 100%;
+}
+.messages-table table .sender-container i
+{
+  font-size: 34px;
+  margin-right: 15px;
+  color: #a0a0a0;
+  background:#f1f1f1;
+  border-radius: 2px;
+}
+.message-opener
+{
+  color: #c5c5c5;
+  cursor: pointer
+}
+.color-blue
+{
+  color: #4B21FF;
+}
+.messages-table table td
+{
+  padding-bottom: 15px;
+  padding-top: 10px;
+}
+.messages-table table tr
+{
+  padding:10px 0px;
+  border-bottom:1px solid #e9e9e9;
+}
+.flex
+{
+  display: flex;
+}
+.custom-name
+{
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  margin-top: 4px;
+  letter-spacing: .5px;
+  color: #343434;
+}
+.custom-email
+{
+  font-size: 12px;
+  color: #b3b3b3;
+}
+.budget
+{
+  font-size: 12px;
+  font-weight: 600;
+
+}
+.budget-title
+{
+  font-size: 11px;
+}
+.sender-container i,.sender-container div
+{
+  display: inline-block
+}
+.time
+{
+  font-size: 13px;
+  color: #b9b9b9;
+}
+.load-more
+{
+  margin-top: 10px;
+  font-size: 12px;
+  color: #4B21FF;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+.loyal-top
+{
+  display: flex;
+  justify-content: space-between;
+}
+.loyal-top h4
+{
+  font-size:19px;
+}
+.employee-list
+{
+  margin-top: 25px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 350px;
+}
+/* width */
+.employee-list::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* Track */
+.employee-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.employee-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+/* Handle on hover */
+.employee-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.employee-list li
+{
+  display: flex;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: 1px solid #e9e9e9;
+  justify-content: space-between;
+}
+.employee-list li i
+{
+  font-size: 30px;
+  color: #FB376B;
+  border-radius: 50%;
+  padding:3px;
+}
+.cus-name
+{
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.cus-mail
+{
+  font-size: 12px;
+  color: #b0b0b0;
+}
+.cus-time
+{
+  font-size: 11px;
+  color: #b9b9b9;
+}

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,15 +14,22 @@ import { SkillsComponent } from './skills/skills.component';
 import { ToasterService } from './toaster-service.service';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+import { TokenService } from './services/token.service';
+
+import { AuthGuard } from './guards/auth.guard';
+import { GuestGuard } from './guards/guest.guard';
+
 const appRoutes: Routes = [
   {
     path: 'admin-panel',
     component: AdminpanelComponent,
+    canActivate: [AuthGuard],
     data: { title: 'Admin panel' }
   },
   {
     path: 'admin-only',
     component: AdminLoginComponent,
+    canActivate:[GuestGuard],
     data: { title: 'Admin' }
   },
   {
@@ -41,9 +48,13 @@ const appRoutes: Routes = [
     data: { title: 'Projects' }
   },
   {
-    path: '',
+    path: 'about',
     component: LandingPageComponent,
     data: { title: 'Home' }
+  },
+  { path: '',
+    redirectTo: 'about',
+    pathMatch: 'full'
   },
 
 ];
@@ -55,16 +66,19 @@ const appRoutes: Routes = [
     ContactComponent,
     SkillsComponent,
     AdminLoginComponent,
-    AdminpanelComponent
+    AdminpanelComponent,
   ],
   imports: [
   BrowserModule,
   RouterModule.forRoot(appRoutes),
   FormsModule,
-  HttpClientModule
+  HttpClientModule,
   ],
   providers: [
-    ToasterService
+    ToasterService,
+    TokenService,
+    AuthGuard,
+    GuestGuard,
   ],
   bootstrap: [AppComponent]
 })
