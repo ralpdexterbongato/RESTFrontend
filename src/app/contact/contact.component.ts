@@ -27,7 +27,7 @@ export class ContactComponent implements OnInit {
 
     if(confirm("Submit message?"))
     {
-      this.httpClient.post(`http://127.0.0.1:8000/message`,{
+      this.httpClient.post(`http://127.0.0.1:8000/api/message`,{
         cfullname: this.cfullname,
         cemail: this.cemail,
         cbudget : this.cbudget,
@@ -36,17 +36,11 @@ export class ContactComponent implements OnInit {
     .subscribe(
       res => {
         console.log(res);
-        if(false)
-        {
-
-        }else
-        {
           vm.toasterService.Success("Your message has been sent","Success!");
           vm.cfullname = '';
           vm.cemail = '';
           vm.cbudget = '';
           vm.cmessage = '';
-        }
       },
       err => {
         console.log(err);

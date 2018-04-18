@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -18,6 +18,8 @@ import { TokenService } from './services/token.service';
 
 import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
+
+import { MyHttpInterceptor } from './my-http-interceptor';
 
 const appRoutes: Routes = [
   {
@@ -79,6 +81,11 @@ const appRoutes: Routes = [
     TokenService,
     AuthGuard,
     GuestGuard,
+    {
+     provide: HTTP_INTERCEPTORS,
+     useClass: MyHttpInterceptor,
+     multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

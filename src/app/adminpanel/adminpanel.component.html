@@ -1,5 +1,8 @@
 <div class="dashboard-container">
-  <h3 class="dash-title">Dashboard</h3>
+  <div class="dash-top">
+    <h3 class="dash-title">Dashboard</h3>
+    <button type="button"(click)="logout()" name="button"><i class="material-icons" >exit_to_app</i></button>
+  </div>
   <div class="dash-sm-boxes">
     <div class="dash-sm-box">
       <div class="sm-box-left">
@@ -49,7 +52,8 @@
   <div class="dash-center-boxes">
     <div class="inbox-box">
       <div class="inbox-top">
-        <h4>Messages</h4>
+        <h4 *ngIf="showIndex==null">Messages</h4>
+        <h4><i class="material-icons" (click)="closeMessage()" *ngIf="showIndex!=null">arrow_back</i></h4>
         <select>
           <option>All</option>
           <option>Read</option>
@@ -57,162 +61,62 @@
         </select>
       </div>
       <div class="messages-table">
-        <table>
-          <tr>
+        <div class="full-message-container" [ngClass]="{'active':showIndex != null}">
+          <div class="sender-data" *ngIf="showIndex!=null">
+            <h4>{{inboxList[showIndex].fullname}}</h4>
+            <p>{{inboxList[showIndex].created_at}}</p>
+          </div>
+          <div class="parag-message" *ngIf="showIndex!=null">
+            <p>{{inboxList[showIndex].message}}</p>
+          </div>
+          <div class="full-message-footer">
+            <div class="msg-footer-left">
+              <i class="material-icons">bookmark</i><p>mark</p>
+            </div>
+            <div class="msg-footer-right" *ngIf="showIndex!=null">
+              <p>budget: {{inboxList[showIndex].budget}}</p>
+              <p>email: <span class="bold">{{inboxList[showIndex].email}}</span></p>
+            </div>
+          </div>
+        </div>
+        <table class="table-list" [ngClass]="{'active':showIndex != null}">
+          <tr *ngFor="let message of inboxList;index as i">
             <td>
               <div class="sender-container">
                 <i class="material-icons">person</i>
                 <div>
-                  <p class="custom-name">Ralp Dexter Bongato</p>
-                  <p class="custom-email">rdc2898@gmail.com</p>
+                  <p class="custom-name">{{message.fullname}}</p>
+                  <p class="custom-email">{{message.email}}</p>
                 </div>
               </div>
             </td>
             <td>
               <div>
-                <p class="budget">P1200-100</p>
+                <p class="budget">{{message.budget}}</p>
               </div>
             </td>
             <td>
-              <p class="time">9 min ago</p>
+              <p class="time">{{message.created_at}}</p>
             </td>
-            <td class="message-opener color-blue"><i class="material-icons">chevron_right</i></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="sender-container">
-                <i class="material-icons">person</i>
-                <div>
-                  <p class="custom-name">Ralp Dexter Bongato</p>
-                  <p class="custom-email">rdc2898@gmail.com</p>
-                </div>
-              </div>
+            <td class="message-opener color-blue">
+              <i (click)="openMessage(i)" class="material-icons">chevron_right</i>
             </td>
-            <td>
-              <div>
-                <p class="budget">P1200-100</p>
-              </div>
-            </td>
-            <td>
-              <p class="time">9 min ago</p>
-            </td>
-            <td class="message-opener color-blue"><i class="material-icons">chevron_right</i></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="sender-container">
-                <i class="material-icons">person</i>
-                <div>
-                  <p class="custom-name">Ralp Dexter Bongato</p>
-                  <p class="custom-email">rdc2898@gmail.com</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div>
-                <p class="budget">P1200-100</p>
-              </div>
-            </td>
-            <td>
-              <p class="time">9 min ago</p>
-            </td>
-            <td class="message-opener color-blue"><i class="material-icons">chevron_right</i></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="sender-container">
-                <i class="material-icons">person</i>
-                <div>
-                  <p class="custom-name">Ralp Dexter Bongato</p>
-                  <p class="custom-email">rdc2898@gmail.com</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div>
-                <p class="budget">P1200-100</p>
-              </div>
-            </td>
-            <td>
-              <p class="time">9 min ago</p>
-            </td>
-            <td class="message-opener color-blue"><i class="material-icons">chevron_right</i></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="sender-container">
-                <i class="material-icons">person</i>
-                <div>
-                  <p class="custom-name">Ralp Dexter Bongato</p>
-                  <p class="custom-email">rdc2898@gmail.com</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div>
-                <p class="budget">P1200-100</p>
-              </div>
-            </td>
-            <td>
-              <p class="time">9 min ago</p>
-            </td>
-            <td class="message-opener"><i class="material-icons">chevron_right</i></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="sender-container">
-                <i class="material-icons">person</i>
-                <div>
-                  <p class="custom-name">Ralp Dexter Bongato</p>
-                  <p class="custom-email">rdc2898@gmail.com</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div>
-                <p class="budget">P1200-100</p>
-              </div>
-            </td>
-            <td>
-              <p class="time">9 min ago</p>
-            </td>
-            <td class="message-opener"><i class="material-icons">chevron_right</i></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="sender-container">
-                <i class="material-icons">person</i>
-                <div>
-                  <p class="custom-name">Ralp Dexter Bongato</p>
-                  <p class="custom-email">rdc2898@gmail.com</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div>
-                <p class="budget">P1200-100</p>
-              </div>
-            </td>
-            <td>
-              <p class="time">9 min ago</p>
-            </td>
-            <td class="message-opener"><i class="material-icons">chevron_right</i></td>
           </tr>
         </table>
-        <div class="load-more">
+        <div class="load-more" *ngIf="pagination.next_page_url != null">
           More...
         </div>
       </div>
     </div>
     <div class="loyal-customers-container">
       <div class="loyal-top">
-        <h4>Loyal customers</h4>
+        <h4>Bookmarked</h4>
         <i class="material-icons">more_horiz</i>
       </div>
       <div class="employee-list">
         <ul>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -220,7 +124,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -228,7 +132,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -236,7 +140,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -244,7 +148,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -252,7 +156,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -260,7 +164,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -268,7 +172,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -276,7 +180,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -284,7 +188,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -292,7 +196,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
@@ -300,7 +204,7 @@
             <p class="cus-time">8 hours ago</p>
           </li>
           <li>
-            <i class="material-icons">favorite</i>
+            <i class="material-icons">bookmark_border</i>
             <div class="cus-data">
               <p class="cus-name">Ralp Dexter Bongato</p>
               <p class="cus-mail">rdc2898@gmail.com</p>
