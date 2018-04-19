@@ -7,12 +7,12 @@
     <div class="dash-sm-box">
       <div class="sm-box-left">
         <div class="circle background-blue">
-        <i class="material-icons">email</i>
+        <i class="material-icons">mail</i>
         </div>
       </div>
       <div class="sm-box-right">
-        <h4>1900</h4>
-        <p>Total received</p>
+        <h4>{{totalMsg}}</h4>
+        <p>Total mails</p>
       </div>
     </div>
     <div class="dash-sm-box">
@@ -22,195 +22,112 @@
         </div>
       </div>
       <div class="sm-box-right">
-        <h4>1900</h4>
-        <p>Unread messages</p>
+        <h4>{{totalUnread}}</h4>
+        <p>Unread mails</p>
       </div>
     </div>
     <div class="dash-sm-box">
       <div class="sm-box-left">
         <div class="circle background-orange">
-        <i class="material-icons">delete</i>
+        <i class="material-icons">drafts</i>
         </div>
       </div>
       <div class="sm-box-right">
-        <h4>1900</h4>
-        <p>Deleted messages</p>
+        <h4>{{totalRead}}</h4>
+        <p>Read mails</p>
       </div>
     </div>
     <div class="dash-sm-box">
       <div class="sm-box-left">
         <div class="circle background-purple">
-        <i class="material-icons">people</i>
+        <i class="material-icons">bookmark</i>
         </div>
       </div>
       <div class="sm-box-right">
-        <h4>1900</h4>
-        <p>Total visits</p>
+        <h4>{{totalBookmark}}</h4>
+        <p>Bookmarks</p>
       </div>
     </div>
   </div>
   <div class="dash-center-boxes">
     <div class="inbox-box">
       <div class="inbox-top">
-        <h4 *ngIf="showIndex==null">Messages</h4>
-        <h4><i class="material-icons" (click)="closeMessage()" *ngIf="showIndex!=null">arrow_back</i></h4>
-        <select>
-          <option>All</option>
-          <option>Read</option>
-          <option>Unread</option>
+        <h4 *ngIf="currentlyOpen.id==null">Messages</h4>
+        <h4><i class="material-icons" (click)="closeMessage()" *ngIf="currentlyOpen.id!=null">arrow_back</i></h4>
+        <select [(ngModel)]="getType" (change)="getMessages(1)" [disabled]="currentlyOpen.id!=null">
+          <option value="all">All</option>
+          <option value="unread">Unread</option>
+          <option value="read">Read</option>
         </select>
       </div>
-      <div class="messages-table">
-        <div class="full-message-container" [ngClass]="{'active':showIndex != null}">
-          <div class="sender-data" *ngIf="showIndex!=null">
-            <h4>{{inboxList[showIndex].fullname}}</h4>
-            <p>{{inboxList[showIndex].created_at}}</p>
-          </div>
-          <div class="parag-message" *ngIf="showIndex!=null">
-            <p>{{inboxList[showIndex].message}}</p>
-          </div>
-          <div class="full-message-footer">
-            <div class="msg-footer-left">
-              <i class="material-icons">bookmark</i><p>mark</p>
+      <div class="message-viewer-container">
+        <div class="message-show">
+          <div class="full-message-container" [ngClass]="{'active':currentlyOpen.id != null}">
+            <div class="sender-data" >
+              <h4>{{currentlyOpen.fullname}}</h4>
+              <p>{{currentlyOpen.created_at}}</p>
             </div>
-            <div class="msg-footer-right" *ngIf="showIndex!=null">
-              <p>budget: {{inboxList[showIndex].budget}}</p>
-              <p>email: <span class="bold">{{inboxList[showIndex].email}}</span></p>
+            <div class="parag-message">
+              <p>{{currentlyOpen.message}}</p>
+            </div>
+            <div class="full-message-footer">
+              <div class="msg-footer-left">
+                <p>{{currentlyOpen.budget}}</p>
+                <p><span class="bold">{{currentlyOpen.email}}</span></p>
+              </div>
+              <div class="msg-footer-right">
+                <i class="material-icons" *ngIf="bookmarked == false" (click)="addToBookMarks(currentlyOpen.id)">bookmark_border</i>
+                <i class="material-icons" *ngIf="bookmarked == true" (click)="removeFromBookMarks(currentlyOpen.id)">bookmark</i>
+              </div>
             </div>
           </div>
         </div>
-        <table class="table-list" [ngClass]="{'active':showIndex != null}">
-          <tr *ngFor="let message of inboxList;index as i">
-            <td>
-              <div class="sender-container">
-                <i class="material-icons">person</i>
-                <div>
-                  <p class="custom-name">{{message.fullname}}</p>
-                  <p class="custom-email">{{message.email}}</p>
+        <div class="messages-table" [ngClass]="{'active':currentlyOpen.id != null}">
+          <table class="table-list" *ngIf="inboxList.length>0">
+            <tr *ngFor="let message of inboxList;index as i">
+              <td>
+                <div class="sender-container">
+                  <i class="material-icons">person</i>
+                  <div>
+                    <p class="custom-name">{{message.fullname}}</p>
+                    <p class="custom-email">{{message.email}}</p>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>
-              <div>
-                <p class="budget">{{message.budget}}</p>
-              </div>
-            </td>
-            <td>
-              <p class="time">{{message.created_at}}</p>
-            </td>
-            <td class="message-opener color-blue">
-              <i (click)="openMessage(i)" class="material-icons">chevron_right</i>
-            </td>
-          </tr>
-        </table>
-        <div class="load-more" *ngIf="pagination.next_page_url != null">
-          More...
+              </td>
+              <td>
+                <div class="msg-mark">
+                  <i class="material-icons">mail</i>
+                  <p class="time">{{message.created_at}}</p>
+                </div>
+              </td>
+              <td class="message-opener" [ngClass]="{'color-blue':message.read!=0}">
+                <i (click)="openMessage(message.id,i)" class="material-icons">chevron_right</i>
+              </td>
+            </tr>
+          </table>
+          <p *ngIf="inboxList.length == 0" class="no-result-label">No results found</p>
+          <div class="load-more" (click)="getMessages(currentpage+1)" *ngIf="nextPageUrl != null && currentlyOpen.id==null">
+            More...
+          </div>
         </div>
       </div>
     </div>
     <div class="loyal-customers-container">
       <div class="loyal-top">
-        <h4>Bookmarked</h4>
+        <h4>Bookmarks</h4>
         <i class="material-icons">more_horiz</i>
       </div>
       <div class="employee-list">
         <ul>
-          <li>
-            <i class="material-icons">bookmark_border</i>
+          <li *ngFor="let bookline of bookMarkList" (click)="openMessage(bookline.id,null)">
+            <i class="material-icons">mail</i>
             <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
+              <p class="cus-name">{{bookline.fullname}}</p>
+              <p class="cus-mail">{{bookline.email}}</p>
             </div>
-            <p class="cus-time">8 hours ago</p>
+            <p class="cus-time">{{bookline.created_at}}</p>
           </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
-          <li>
-            <i class="material-icons">bookmark_border</i>
-            <div class="cus-data">
-              <p class="cus-name">Ralp Dexter Bongato</p>
-              <p class="cus-mail">rdc2898@gmail.com</p>
-            </div>
-            <p class="cus-time">8 hours ago</p>
-          </li>
+          <p class="load-more" (click)="displayBookMarks(bookCurrentPage+1)" *ngIf="bookNextUrl != null">More...</p>
         </ul>
       </div>
     </div>

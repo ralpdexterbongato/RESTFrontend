@@ -1,7 +1,7 @@
 <div class="login-page-container">
   <div class="center-form-box">
     <div class="shortcut-check">
-      <h5 class="dot"></h5> 5 messages
+      <h5 class="dot"></h5> {{totalUnreadFromOutside}} messages
     </div>
     <div class="input-login-wrap">
       <input type="text" [(ngModel)]="email" [ngClass]="{'active':email!=''}" id="email" autocomplete="off" required >

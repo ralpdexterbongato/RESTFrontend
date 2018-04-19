@@ -15,8 +15,10 @@ export class AdminLoginComponent implements OnInit {
 
   password:string = '';
   email:string = '';
+  totalUnreadFromOutside =0;
 
   ngOnInit() {
+    this.getUnreadCount();
   }
 
   submitLogin()
@@ -40,6 +42,26 @@ export class AdminLoginComponent implements OnInit {
   handleData(data)
   {
      this.tokenService.handle(data.access_token);
+  }
+
+  getUnreadCount()
+  {
+    this.http.get(`http://127.0.0.1:8000/api/unreadCount`).subscribe(
+      data=>
+      {
+        console.log(data);
+        this.handleUnreadCountData(data);
+
+      },
+      error=>
+      {
+        console.log(error);
+      }
+    );
+  }
+  handleUnreadCountData(data)
+  {
+    this.totalUnreadFromOutside = data;
   }
 
 
