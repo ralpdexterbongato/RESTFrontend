@@ -4,48 +4,52 @@
     <button type="button"(click)="logout()" name="button"><i class="material-icons" >exit_to_app</i></button>
   </div>
   <div class="dash-sm-boxes">
-    <div class="dash-sm-box">
-      <div class="sm-box-left">
-        <div class="circle background-blue">
-        <i class="material-icons">mail</i>
+    <div class="dash-inner-container">
+      <div class="dash-sm-box no-margin-left">
+        <div class="sm-box-left">
+          <div class="circle background-blue">
+          <i class="material-icons">mail</i>
+          </div>
+        </div>
+        <div class="sm-box-right">
+          <h4>{{totalMsg}}</h4>
+          <p>Total mails</p>
         </div>
       </div>
-      <div class="sm-box-right">
-        <h4>{{totalMsg}}</h4>
-        <p>Total mails</p>
+      <div class="dash-sm-box">
+        <div class="sm-box-left">
+          <div class="circle background-pink">
+          <i class="material-icons">email</i>
+          </div>
+        </div>
+        <div class="sm-box-right">
+          <h4>{{totalUnread}}</h4>
+          <p>Unread mails</p>
+        </div>
       </div>
     </div>
-    <div class="dash-sm-box">
-      <div class="sm-box-left">
-        <div class="circle background-pink">
-        <i class="material-icons">email</i>
+    <div class="dash-inner-container">
+      <div class="dash-sm-box">
+        <div class="sm-box-left">
+          <div class="circle background-orange">
+          <i class="material-icons">drafts</i>
+          </div>
+        </div>
+        <div class="sm-box-right">
+          <h4>{{totalRead}}</h4>
+          <p>Read mails</p>
         </div>
       </div>
-      <div class="sm-box-right">
-        <h4>{{totalUnread}}</h4>
-        <p>Unread mails</p>
-      </div>
-    </div>
-    <div class="dash-sm-box">
-      <div class="sm-box-left">
-        <div class="circle background-orange">
-        <i class="material-icons">drafts</i>
+      <div class="dash-sm-box">
+        <div class="sm-box-left">
+          <div class="circle background-purple">
+          <i class="material-icons">bookmark</i>
+          </div>
         </div>
-      </div>
-      <div class="sm-box-right">
-        <h4>{{totalRead}}</h4>
-        <p>Read mails</p>
-      </div>
-    </div>
-    <div class="dash-sm-box">
-      <div class="sm-box-left">
-        <div class="circle background-purple">
-        <i class="material-icons">bookmark</i>
+        <div class="sm-box-right">
+          <h4>{{totalBookmark}}</h4>
+          <p>Bookmarks</p>
         </div>
-      </div>
-      <div class="sm-box-right">
-        <h4>{{totalBookmark}}</h4>
-        <p>Bookmarks</p>
       </div>
     </div>
   </div>
@@ -87,7 +91,7 @@
             <tr *ngFor="let message of inboxList;index as i">
               <td>
                 <div class="sender-container">
-                  <i class="material-icons">person</i>
+                  <i class="material-icons sender-box">person</i>
                   <div>
                     <p class="custom-name">{{message.fullname}}</p>
                     <p class="custom-email">{{message.email}}</p>

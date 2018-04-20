@@ -14,7 +14,9 @@ import { SkillsComponent } from './skills/skills.component';
 import { ToasterService } from './toaster-service.service';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+
 import { TokenService } from './services/token.service';
+import { SendLimitService } from './services/sendlimit.service';
 
 import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
@@ -79,6 +81,7 @@ const appRoutes: Routes = [
   providers: [
     ToasterService,
     TokenService,
+    SendLimitService,
     AuthGuard,
     GuestGuard,
     {

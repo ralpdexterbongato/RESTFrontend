@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ToasterService } from '../toaster-service.service';
+import { SendLimitService } from '../services/sendlimit.service';
 import * as $ from 'jquery';
 @Component({
   selector: 'app-contact',
@@ -10,7 +11,11 @@ import * as $ from 'jquery';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private httpClient:HttpClient,private toasterService:ToasterService) { }
+  constructor(
+    private httpClient:HttpClient,
+    private toasterService:ToasterService,
+    private sendLimit: SendLimitService,
+  ) { }
 
   ngOnInit() {
 
@@ -23,8 +28,13 @@ export class ContactComponent implements OnInit {
 
   submitMessage()
   {
+    var cansend =this.sendLimit.CanSend();
+    if(cansend == false)
+    {
+      this.toasterService.Error("You have reach the maximum send");
+      return false;
+    }
     var vm=this;
-
     if(confirm("Submit message?"))
     {
       this.httpClient.post(`http://127.0.0.1:8000/api/message`,{
@@ -41,6 +51,7 @@ export class ContactComponent implements OnInit {
           vm.cemail = '';
           vm.cbudget = '';
           vm.cmessage = '';
+          vm.sendLimit.incrementCount();
       },
       err => {
         console.log(err);
