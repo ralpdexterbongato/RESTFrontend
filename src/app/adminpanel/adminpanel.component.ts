@@ -42,7 +42,7 @@ export class AdminpanelComponent implements OnInit {
   bookCurrentPage = 1;
   openMessage(id,index)
   {
-    this.http.get(`http://127.0.0.1:8000/api/message/`+id).subscribe(
+    this.http.get(`https://ralpdexterbongato.herokuapp.com/api/message/`+id).subscribe(
       data=>{
         console.log(data);
         this.handleCurrentOpen(data);
@@ -85,7 +85,7 @@ export class AdminpanelComponent implements OnInit {
   }
   getMessages(page)
   {
-    this.http.get(`http://127.0.0.1:8000/api/message?page=`+page+`&type=`+this.getType).subscribe(
+    this.http.get(`https://ralpdexterbongato.herokuapp.com/api/message?page=`+page+`&type=`+this.getType).subscribe(
       data=>{
         console.log(data);
         this.inboxHandler(data);
@@ -112,7 +112,7 @@ export class AdminpanelComponent implements OnInit {
 
   logout()
   {
-    this.http.post(`http://127.0.0.1:8000/api/logout`,{}).subscribe(
+    this.http.post(`https://ralpdexterbongato.herokuapp.com/api/logout`,{}).subscribe(
       data=>{
         console.log(data);
         this.token.remove();
@@ -128,7 +128,7 @@ export class AdminpanelComponent implements OnInit {
   addToBookMarks(id)
   {
     var vm=this;
-    this.http.post(`http://127.0.0.1:8000/api/bookmark`,{message_id:id}).subscribe(
+    this.http.post(`https://ralpdexterbongato.herokuapp.com/api/bookmark`,{message_id:id}).subscribe(
       data=>
       {
         console.log(data);
@@ -153,7 +153,7 @@ export class AdminpanelComponent implements OnInit {
   }
   displayBookMarks(page)
   {
-    this.http.get(`http://127.0.0.1:8000/api/bookmark?page=`+page).subscribe(
+    this.http.get(`https://ralpdexterbongato.herokuapp.com/api/bookmark?page=`+page).subscribe(
       data=>
       {
         console.log(data);
@@ -182,7 +182,7 @@ export class AdminpanelComponent implements OnInit {
   }
   getStatistics()
   {
-    this.http.get(`http://127.0.0.1:8000/api/statistics`).subscribe(
+    this.http.get(`https://ralpdexterbongato.herokuapp.com/api/statistics`).subscribe(
       data=>
       {
         console.log(data);
@@ -203,7 +203,7 @@ export class AdminpanelComponent implements OnInit {
   }
   removeFromBookMarks(id)
   {
-    this.http.delete(`http://127.0.0.1:8000/api/bookmark/`+id).subscribe(
+    this.http.delete(`https://ralpdexterbongato.herokuapp.com/api/bookmark/`+id).subscribe(
       data=>{
         console.log(data);
         this.bookmarked=false;

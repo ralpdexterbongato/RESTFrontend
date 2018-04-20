@@ -37,7 +37,7 @@ export class ContactComponent implements OnInit {
     var vm=this;
     if(confirm("Submit message?"))
     {
-      this.httpClient.post(`http://127.0.0.1:8000/api/message`,{
+      this.httpClient.post(`https://ralpdexterbongato.herokuapp.com/api/message`,{
         cfullname: this.cfullname,
         cemail: this.cemail,
         cbudget : this.cbudget,

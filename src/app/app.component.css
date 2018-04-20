@@ -109,6 +109,7 @@
 .content-container
 {
   flex:1;
+  min-height: 400px;
 }
 .info-list li
 {

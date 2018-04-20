@@ -23,7 +23,7 @@ export class AdminLoginComponent implements OnInit {
 
   submitLogin()
   {
-    this.http.post(`http://127.0.0.1:8000/api/login`,{
+    this.http.post(`https://ralpdexterbongato.herokuapp.com/api/login`,{
       email:this.email,
       password:this.password
     }).subscribe(
@@ -46,7 +46,7 @@ export class AdminLoginComponent implements OnInit {
 
   getUnreadCount()
   {
-    this.http.get(`http://127.0.0.1:8000/api/unreadCount`).subscribe(
+    this.http.get(`https://ralpdexterbongato.herokuapp.com/api/unreadCount`).subscribe(
       data=>
       {
         console.log(data);

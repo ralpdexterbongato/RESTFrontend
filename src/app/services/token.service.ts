@@ -4,8 +4,9 @@ import { Injectable } from '@angular/core';
 export class TokenService {
 
   private iss = {
-    login: 'http://127.0.0.1:8000/api/login',
-    logout: 'http://127.0.0.1:8000/api/logout',
+    login:'http://ralpdexterbongato.herokuapp.com/api/login',
+    logout:'http://ralpdexterbongato.herokuapp.com/api/logout',
+
   }
 
   constructor() { }
@@ -21,7 +22,9 @@ export class TokenService {
   }
   get()
   {
-    return localStorage.getItem('token');
+    var theToken =  localStorage.getItem('token');
+    console.log(theToken);
+    return theToken;
   }
   remove()
   {
@@ -33,6 +36,7 @@ export class TokenService {
     if(token)
     {
       let payload = this.getPayLoad(token);
+      console.log(payload);
       if(payload)
       {
           return Object.values(this.iss).indexOf(payload.iss) > -1 ? true:false;
