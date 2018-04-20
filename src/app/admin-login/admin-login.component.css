@@ -8,12 +8,8 @@
 .shortcut-check
 {
   font-size: 14px;
-  font-family: 'Comfortaa',sans-serif;
-  position: absolute;
-  top: -40px;
-  right: 0px;
+  margin-top: 10px;
   color:#b0b0b0;
-  
 }
 .shortcut-check h5
 {
@@ -29,24 +25,24 @@
 }
 .login-page-container button
 {
-  margin-top: 20px;
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
   outline-style: none;
-  display: flex;
   border-style: none;
-  justify-content: space-between;
-  border-radius: 2px;
+  border-radius: 20px;
   background: #6037FF;
   padding:7px 15px;
   color: #f8f8f8;
   font-size: 15px;
   font-family: 'yantramanav',sans-serif;
-  width: 90px;
-  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
+  box-shadow: outset 0 1px 2px rgba(27,31,35,0.075);
 }
 .center-form-box
 {
   margin:auto;
   display: flex;
+  overflow-x: hidden;
   flex-direction: column;
   width: 360px;
   position: relative;
@@ -55,7 +51,7 @@
 {
   .center-form-box
   {
-    width:75%;
+    width:100%;
     margin:auto;
   }
 }
@@ -64,21 +60,14 @@
   position: relative;
   margin: 25px 5px;
   font-family: 'Roboto',sans-serif;
+  height: 20px;
 }
 
-.input-login-wrap i
-{
-  position: absolute;
-  left: -40px;
-  top: 0px;
-  color: #c0c0c0;
-  transition: color .2s;
-}
 .input-login-wrap label
 {
   position: absolute;
   top:0px;
-  left: 5px;
+  left: 0px;
   pointer-events: none;
   color: #b0b0b0;
   font-size: 15px;
@@ -92,22 +81,24 @@
   padding:5px;
   outline-style: none;
   font-size: 14px;
-  border-bottom: 2px solid #c0c0c0;
+  width: 100%;
+  border-bottom: 1px solid #c0c0c0;
   transition: border-color .2s;
 }
 .input-login-wrap input:focus + label,.input-login-wrap label.active
 {
   top: -20px;
   font-size: 12px;
-  color: #6037FF;
+  color: #272727;
 }
 .input-login-wrap input:focus + label + i,.input-login-wrap i.active
 {
-  color: #6037FF;
+  color: #272727;
 }
 .input-login-wrap input:focus,.input-login-wrap input.active
 {
-  border-color: #6037FF;
+  border-color: #272727;
+  border-bottom: 2px solid #272727;
 }
 .highlight
 {
@@ -123,4 +114,15 @@
   border-radius: 50%;
   background:#4B21FF;
   margin-right:0px;
+}
+.welcome-title
+{
+  font-size: 20px;
+}
+.welcome-desc
+{
+  font-size: 15px;
+  color: #c0c0c0;
+  margin-top: 4px;
+  margin-bottom: 20px;
 }

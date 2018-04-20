@@ -68,7 +68,7 @@ export class AdminpanelComponent implements OnInit {
   }
   handleCurrentOpen(data)
   {
-    this.currentlyOpen = data[0];
+    this.currentlyOpen = data;
     if(data[0].receiver.length > 0)
     {
       this.bookmarked = true;

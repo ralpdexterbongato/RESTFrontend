@@ -1,19 +1,19 @@
 <div class="login-page-container">
   <div class="center-form-box">
-    <div class="shortcut-check">
-      <h5 class="dot"></h5> {{totalUnreadFromOutside}} messages
-    </div>
+    <h1 class="welcome-title">Welcome back</h1>
+    <p class="welcome-desc">Please log-in to continue</p>
     <div class="input-login-wrap">
       <input type="text" [(ngModel)]="email" [ngClass]="{'active':email!=''}" id="email" autocomplete="off" required >
       <label [ngClass]="{'active':email!=''}">Email</label>
-      <i class="material-icons" [ngClass]="{'active':email!=''}">person</i>
     </div>
     <div class="input-login-wrap">
       <input [(ngModel)]="password" type="password" [ngClass]="{'active':password!=''}" autocomplete="off" id="password">
       <label [ngClass]="{'active':password!=''}">Password</label>
-      <i class="material-icons" [ngClass]="{'active':password!=''}">vpn_key</i>
+    </div>
+    <div class="shortcut-check">
+      <h5 class="dot"></h5> {{totalUnreadFromOutside}} messages
     </div>
     <button type="button" (click)="submitLogin()" name="button">
-      <i class="material-icons">send</i> <p>Login</p></button>
+    <p>Login</p></button>
   </div>
 </div>

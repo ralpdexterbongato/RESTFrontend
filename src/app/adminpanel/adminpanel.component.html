@@ -56,9 +56,9 @@
   <div class="dash-center-boxes">
     <div class="inbox-box">
       <div class="inbox-top">
-        <h4 *ngIf="currentlyOpen.id==null">Messages</h4>
-        <h4><i class="material-icons" (click)="closeMessage()" *ngIf="currentlyOpen.id!=null">arrow_back</i></h4>
-        <select [(ngModel)]="getType" (change)="getMessages(1)" [disabled]="currentlyOpen.id!=null">
+        <h4 *ngIf="currentlyOpen.length == 0">Messages</h4>
+        <h4><i class="material-icons" (click)="closeMessage()" *ngIf="currentlyOpen.length > 0">arrow_back</i></h4>
+        <select [(ngModel)]="getType" (change)="getMessages(1)" [disabled]="currentlyOpen.length > 0">
           <option value="all">All</option>
           <option value="unread">Unread</option>
           <option value="read">Read</option>
@@ -66,27 +66,27 @@
       </div>
       <div class="message-viewer-container">
         <div class="message-show">
-          <div class="full-message-container" [ngClass]="{'active':currentlyOpen.id != null}">
-            <div class="sender-data" >
-              <h4>{{currentlyOpen.fullname}}</h4>
-              <p>{{currentlyOpen.created_at}}</p>
+          <div class="full-message-container" [ngClass]="{'active':currentlyOpen.length > 0}">
+            <div class="sender-data" *ngIf="currentlyOpen.length > 0" >
+              <h4>{{currentlyOpen[0].fullname}}</h4>
+              <p>{{currentlyOpen[0].created_at}}</p>
             </div>
-            <div class="parag-message">
-              <p>{{currentlyOpen.message}}</p>
+            <div class="parag-message" *ngIf="currentlyOpen.length > 0">
+              <p>{{currentlyOpen[0].message}}</p>
             </div>
             <div class="full-message-footer">
-              <div class="msg-footer-left">
-                <p>{{currentlyOpen.budget}}</p>
-                <p><span class="bold">{{currentlyOpen.email}}</span></p>
+              <div class="msg-footer-left" *ngIf="currentlyOpen.length > 0">
+                <p>{{currentlyOpen[0].budget}}</p>
+                <p><span class="bold">{{currentlyOpen[0].email}}</span></p>
               </div>
               <div class="msg-footer-right">
-                <i class="material-icons" *ngIf="bookmarked == false" (click)="addToBookMarks(currentlyOpen.id)">bookmark_border</i>
-                <i class="material-icons" *ngIf="bookmarked == true" (click)="removeFromBookMarks(currentlyOpen.id)">bookmark</i>
+                <i class="material-icons" *ngIf="bookmarked == false" (click)="addToBookMarks(currentlyOpen[0].id)">bookmark_border</i>
+                <i class="material-icons" *ngIf="bookmarked == true" (click)="removeFromBookMarks(currentlyOpen[0].id)">bookmark</i>
               </div>
             </div>
           </div>
         </div>
-        <div class="messages-table" [ngClass]="{'active':currentlyOpen.id != null}">
+        <div class="messages-table" [ngClass]="{'active':currentlyOpen.length > 0}">
           <table class="table-list" *ngIf="inboxList.length>0">
             <tr *ngFor="let message of inboxList;index as i">
               <td>
@@ -110,7 +110,7 @@
             </tr>
           </table>
           <p *ngIf="inboxList.length == 0" class="no-result-label">No results found</p>
-          <div class="load-more" (click)="getMessages(currentpage+1)" *ngIf="nextPageUrl != null && currentlyOpen.id==null">
+          <div class="load-more" (click)="getMessages(currentpage+1)" *ngIf="nextPageUrl != null && currentlyOpen.length == 0">
             More...
           </div>
         </div>
