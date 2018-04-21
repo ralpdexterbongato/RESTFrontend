@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  public loading = false;
   constructor(private router: Router) {}
 
   title = 'app';

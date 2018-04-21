@@ -11,11 +11,17 @@ import { TokenService } from '../services/token.service';
 })
 export class AdminLoginComponent implements OnInit {
 
-  constructor(private tokenService:TokenService,private router:Router,private http:HttpClient,private toaster:ToasterService) { }
+  constructor(
+    private tokenService:TokenService,
+    private router:Router,
+    private http:HttpClient,
+    private toaster:ToasterService,
+  ) { }
 
   password:string = '';
   email:string = '';
   totalUnreadFromOutside =0;
+  loading= false;
 
   ngOnInit() {
     this.getUnreadCount();
@@ -23,6 +29,7 @@ export class AdminLoginComponent implements OnInit {
 
   submitLogin()
   {
+    this.loading= true;
     this.http.post(`https://ralpdexterbongato.herokuapp.com/api/login`,{
       email:this.email,
       password:this.password
@@ -31,11 +38,12 @@ export class AdminLoginComponent implements OnInit {
         this.handleData(data);
         this.router.navigate(['admin-panel']);
         this.toaster.Success("Ralp Dexter!","Welcome back");
-
+        this.loading = false;
       },
       err => {
         console.log(err);
         this.toaster.Error(err.error.error,"Incorrect");
+        this.loading = false;
       }
     )
   }

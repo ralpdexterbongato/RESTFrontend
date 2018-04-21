@@ -25,7 +25,7 @@ export class ContactComponent implements OnInit {
   cemail = '';
   cbudget = '';
   cmessage = '';
-
+  loading = false;
   submitMessage()
   {
     var cansend =this.sendLimit.CanSend();
@@ -34,6 +34,7 @@ export class ContactComponent implements OnInit {
       this.toasterService.Error("You have reach the maximum send");
       return false;
     }
+    this.loading=true;
     var vm=this;
     if(confirm("Submit message?"))
     {
@@ -52,10 +53,12 @@ export class ContactComponent implements OnInit {
           vm.cbudget = '';
           vm.cmessage = '';
           vm.sendLimit.incrementCount();
+          this.loading = false;
       },
       err => {
         console.log(err);
         vm.toasterService.Error("Please check your inputs","Invalid");
+        this.loading = false;
       }
     )
     }

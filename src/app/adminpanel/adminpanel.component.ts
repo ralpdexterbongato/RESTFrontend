@@ -31,6 +31,8 @@ export class AdminpanelComponent implements OnInit {
   bookMarkList = [];
   currentlyOpen=[];
 
+  loading = false;
+
   totalBookmark=0;
   totalUnread =0;
   totalRead = 0;
@@ -42,6 +44,7 @@ export class AdminpanelComponent implements OnInit {
   bookCurrentPage = 1;
   openMessage(id,index)
   {
+    this.loading=true;
     this.http.get(`https://ralpdexterbongato.herokuapp.com/api/message/`+id).subscribe(
       data=>{
         console.log(data);
@@ -50,9 +53,11 @@ export class AdminpanelComponent implements OnInit {
         {
           this.handleMarkAsOpen(index);
         }
+        this.loading=false;
       },
       error=>{
         console.log(error);
+        this.loading=false;
       }
     )
   }
@@ -85,13 +90,16 @@ export class AdminpanelComponent implements OnInit {
   }
   getMessages(page)
   {
+    this.loading=true;
     this.http.get(`https://ralpdexterbongato.herokuapp.com/api/message?page=`+page+`&type=`+this.getType).subscribe(
       data=>{
         console.log(data);
         this.inboxHandler(data);
+        this.loading=false;
       },
       err=>{
         console.log(err);
+        this.loading=false;
       }
     )
   }
@@ -112,21 +120,25 @@ export class AdminpanelComponent implements OnInit {
 
   logout()
   {
+    this.loading=true;
     this.http.post(`https://ralpdexterbongato.herokuapp.com/api/logout`,{}).subscribe(
       data=>{
         console.log(data);
         this.token.remove();
         this.router.navigate(['admin-only']);
+        this.loading=false;
       },
       error=>{
         console.log(error);
         this.token.remove();
         this.router.navigate(['admin-only']);
+        this.loading=false;
       }
     );
   }
   addToBookMarks(id)
   {
+    this.loading=true;
     var vm=this;
     this.http.post(`https://ralpdexterbongato.herokuapp.com/api/bookmark`,{message_id:id}).subscribe(
       data=>
@@ -135,6 +147,7 @@ export class AdminpanelComponent implements OnInit {
         vm.toaster.Success("added to bookmarks list","Successfully");
         vm.PushToBookMarkList(this.openedIndex);
         vm.bookmarked=true;
+        this.loading=false;
       },
       error=>
       {
@@ -143,6 +156,7 @@ export class AdminpanelComponent implements OnInit {
         {
           vm.toaster.Error("Already added to bookmarks","Oops!");
         }
+        this.loading=false;
       }
     )
   }
@@ -153,15 +167,18 @@ export class AdminpanelComponent implements OnInit {
   }
   displayBookMarks(page)
   {
+    this.loading=true;
     this.http.get(`https://ralpdexterbongato.herokuapp.com/api/bookmark?page=`+page).subscribe(
       data=>
       {
         console.log(data);
         this.handleBookMarks(data);
+        this.loading=false;
       },
       error=>
       {
         console.log(error);
+        this.loading=false;
       }
     )
   }
@@ -203,15 +220,18 @@ export class AdminpanelComponent implements OnInit {
   }
   removeFromBookMarks(id)
   {
+    this.loading=true;
     this.http.delete(`https://ralpdexterbongato.herokuapp.com/api/bookmark/`+id).subscribe(
       data=>{
         console.log(data);
         this.bookmarked=false;
         this.toaster.Success("removed from bookmarks list","Successfully");
         this.handleRemoveFromCurrentList();
+        this.loading=false;
       },
       error=>{
         console.log(error);
+        this.loading=false;
       }
     )
   }

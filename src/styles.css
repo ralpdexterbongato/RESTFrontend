@@ -69,3 +69,21 @@ table {
 {
   background-color: #2E2E2E!important;
 }
+
+.fixed-load
+{
+  position: fixed!important;
+  top: 0!important;
+  left: 0!important;
+  width: 385px!important;
+  height: 100vh!important;
+	z-index: 9999;
+}
+@media (max-width: 950px)
+{
+	.fixed-load
+	{
+		width: auto!important;
+		right: 0!important;
+	}
+}

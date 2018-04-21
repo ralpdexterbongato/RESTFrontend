@@ -22,7 +22,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
 
 import { MyHttpInterceptor } from './my-http-interceptor';
-
+import { LoadingModule, ANIMATION_TYPES  } from 'ngx-loading';
 const appRoutes: Routes = [
   {
     path: 'admin-panel',
@@ -77,6 +77,14 @@ const appRoutes: Routes = [
   RouterModule.forRoot(appRoutes),
   FormsModule,
   HttpClientModule,
+  LoadingModule.forRoot({
+        animationType: ANIMATION_TYPES.threeBounce,
+        backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+        backdropBorderRadius: '4px',
+        primaryColour: '#ffffff',
+        secondaryColour: '#ffffff',
+        tertiaryColour: '#ffffff'
+    })
   ],
   providers: [
     ToasterService,
