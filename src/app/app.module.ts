@@ -74,7 +74,7 @@ const appRoutes: Routes = [
   ],
   imports: [
   BrowserModule,
-  RouterModule.forRoot(appRoutes, { onSameUrlNavigation:'reload' }),
+  RouterModule.forRoot(appRoutes,{onSameUrlNavigation:'reload'}),
   FormsModule,
   HttpClientModule,
   LoadingModule.forRoot({
